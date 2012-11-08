@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/net.sf.paperclips_1.0.4.200908120926.jar"/>
+	<classpathentry kind="lib" path="lib/net.sf.paperclips.ui_1.0.4.200908120926.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.core.commands_3.6.0.I20110111-0800.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.core.runtime_3.7.0.v20110110.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.equinox.common_3.6.0.v20110523.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.jface_3.7.0.I20110522-1430.jar" sourcepath="lib/org.eclipse.jface.source_3.7.0.I20110522-1430.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.swt.gtk.linux.x86_64_3.7.0.v3735b.jar"/>
+	<classpathentry kind="lib" path="lib/com.patrikdufresne.util_0.1.20121107.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
