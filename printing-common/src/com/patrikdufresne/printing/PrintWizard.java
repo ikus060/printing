@@ -133,12 +133,11 @@ public abstract class PrintWizard extends Wizard {
 			try {
 				getContainer().run(true, false, runnable);
 			} catch (InvocationTargetException e) {
-				Policy.getStatusHandler().show(
-						new Status(IStatus.ERROR, Policy.JFACE, Localized.get(
-								PrintWizard.class,
-								"PrintWizard.printErrorMessage"), e),
-						Localized.get(PrintWizard.class,
-								"PrintWizard.printErrorTitle"));
+				Policy.getStatusHandler()
+						.show(new Status(IStatus.ERROR, Policy.JFACE,
+								Localized.get(PrintWizard.class,
+										"PrintWizard.printErrorMessage"),
+								e.getCause()), null);
 				return false;
 			} catch (InterruptedException e) {
 				// Nothing to do, cancel by user

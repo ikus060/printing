@@ -248,8 +248,18 @@ public abstract class PrintAction extends Action {
 	 * 
 	 * @param factory
 	 *            the factory
+	 * @exception InvocationTargetException
+	 *                if the method must propagate an exception, it should wrap
+	 *                it inside an <code>InvocationTargetException</code>; FIXME
+	 *                runtime exceptions are automatically wrapped in an
+	 *                <code>InvocationTargetException</code> by the calling
+	 *                context
+	 * @exception InterruptedException
+	 *                if the operation is cancel by the user, this method should
+	 *                exit by throwing <code>InterruptedException</code>
 	 */
-	protected void initFactory(IPrintFactory f) {
+	protected void initFactory(IPrintFactory f)
+			throws InvocationTargetException, InterruptedException {
 		// Implemented by sub-class
 	}
 
@@ -338,9 +348,11 @@ public abstract class PrintAction extends Action {
 					.show(new Status(
 							IStatus.ERROR,
 							Policy.JFACE,
-							this.localized.get("PrintAction.printErrorMessage"),
-							e),
-							this.localized.get("PrintAction.printErrorTitle"));
+							getOperation() == PRINT_ACTION ? this.localized
+									.get("PrintAction.printErrorMessage")
+									: this.localized
+											.get("PrintAction.previewErrorMessage"),
+							e.getCause()), null);
 			return;
 		} catch (InterruptedException e) {
 			// Nothing to do, the opperation was cancel by user
