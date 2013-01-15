@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/net.sf.paperclips_1.0.4.200908120926.jar"/>
+	<classpathentry kind="lib" path="lib/net.sf.paperclips_1.0.4.200908120926.jar" sourcepath="lib/net.sf.paperclips.source_1.0.4.200908120926.jar"/>
 	<classpathentry kind="lib" path="lib/net.sf.paperclips.ui_1.0.4.200908120926.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.core.commands_3.6.0.I20110111-0800.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.core.runtime_3.7.0.v20110110.jar"/>

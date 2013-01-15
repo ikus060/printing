@@ -16,6 +16,7 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.util.Policy;
 import org.eclipse.jface.window.IShellProvider;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.printing.PrintDialog;
 import org.eclipse.swt.printing.PrinterData;
 
@@ -96,7 +97,9 @@ public abstract class PrintAction extends Action {
 						getShellProvider());
 				dlg.setPrinterData(getPrinterData());
 				dlg.setPrintJob(this.job);
-				dlg.open();
+				if (dlg.open() == Window.OK) {
+					savePref(dlg.getPrinterData());
+				}
 			}
 		}
 	}
@@ -106,6 +109,7 @@ public abstract class PrintAction extends Action {
 	 * action is run.
 	 */
 	public static final int PREVIEW_ACTION = 2;
+
 	/**
 	 * This constant is used to define the type of operation to do when this
 	 * action is run.
@@ -116,7 +120,6 @@ public abstract class PrintAction extends Action {
 	 * The print factory
 	 */
 	private IPrintFactory factory;
-
 	/**
 	 * Used to localize string.
 	 */
@@ -131,10 +134,12 @@ public abstract class PrintAction extends Action {
 	 * Preference store
 	 */
 	private IPreferenceStore preferenceStore;
+
 	/**
 	 * Key where to save preference
 	 */
 	private String prefKey;
+
 	/**
 	 * Context or execution.
 	 */
@@ -264,20 +269,24 @@ public abstract class PrintAction extends Action {
 	}
 
 	/**
+	 * Load the Printer data from preference store if available.
+	 * 
+	 * @return
+	 */
+	protected PrinterData loadPref() {
+		if (this.preferenceStore != null && this.prefKey != null) {
+			return PrintPreferenceStoreUtil.getPrinterData(
+					this.preferenceStore, this.prefKey);
+		}
+		return null;
+	}
+
+	/**
 	 * Preview the Print object.
 	 */
 	protected void preview() {
-
-		// Retrieve the preferences
-		PrinterData data = null;
-		if (this.preferenceStore != null && this.prefKey != null) {
-			data = PrintPreferenceStoreUtil.getPrinterData(
-					this.preferenceStore, this.prefKey);
-		}
-
 		// Run the preview
-		runWithRunnableContext(new PrintPreviewRunnable(data));
-
+		runWithRunnableContext(new PrintPreviewRunnable(loadPref()));
 	}
 
 	/**
@@ -285,30 +294,19 @@ public abstract class PrintAction extends Action {
 	 */
 	protected void print() {
 
-		// Retrieve the printing preferences
-		PrinterData data = null;
-		if (this.preferenceStore != null && this.prefKey != null) {
-			data = PrintPreferenceStoreUtil.getPrinterData(
-					this.preferenceStore, this.prefKey);
-		}
-
 		// Open printing dialog
 		PrintDialog dlg = new PrintDialog(this.shell.getShell());
 		dlg.setText(this.localized.get("PrintAction.printDialog.title")); //$NON-NLS-1$
-		dlg.setPrinterData(data);
-		data = dlg.open();
+		dlg.setPrinterData(loadPref());
+		PrinterData data = dlg.open();
 		if (data == null) {
 			// Operation cancel by user
 			return;
 		}
-
 		// Save the preferences
-		if (this.preferenceStore != null && this.prefKey != null) {
-			PrintPreferenceStoreUtil.setValue(this.preferenceStore,
-					this.prefKey, data);
-		}
+		savePref(data);
 
-		// Run runnable
+		// Print to printer using runnable context
 		runWithRunnableContext(new PrintPreviewRunnable(data));
 
 	}
@@ -361,6 +359,16 @@ public abstract class PrintAction extends Action {
 
 		runnable.runAfter();
 
+	}
+
+	/**
+	 * Save the printer data into preference store.
+	 */
+	protected void savePref(PrinterData data) {
+		if (this.preferenceStore != null && this.prefKey != null) {
+			PrintPreferenceStoreUtil.setValue(this.preferenceStore,
+					this.prefKey, data);
+		}
 	}
 
 	/**
