@@ -17,6 +17,7 @@ import org.eclipse.jface.window.IShellProvider;
 import org.eclipse.jface.window.SameShellProvider;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
@@ -404,7 +405,7 @@ public class PrintPreviewDialog extends TrayDialog {
 	/**
 	 * Label to display the destination.
 	 */
-	private Text destination;
+	private CLabel destination;
 
 	/**
 	 * The PrintJob to preview
@@ -481,7 +482,7 @@ public class PrintPreviewDialog extends TrayDialog {
 		final Label rightSeparator = new Label(shell, SWT.SEPARATOR
 				| SWT.VERTICAL);
 		rightSeparator.setLayoutData(new GridData(GridData.FILL_VERTICAL));
-		Control trayControl = createLeftPaneContents(shell);
+		Control trayControl = createPaneContents(shell);
 		Rectangle clientArea = shell.getClientArea();
 		final GridData data = new GridData(GridData.FILL_VERTICAL);
 		data.widthHint = trayControl
@@ -529,7 +530,7 @@ public class PrintPreviewDialog extends TrayDialog {
 	 *            the parent composite
 	 * @return
 	 */
-	protected Control createLeftPaneContents(Composite parent) {
+	protected Control createPaneContents(Composite parent) {
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(1, true));
@@ -571,7 +572,7 @@ public class PrintPreviewDialog extends TrayDialog {
 		destinationComp.setLayout(layout);
 		destinationComp.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		this.destination = new Text(destinationComp, SWT.READ_ONLY);
+		this.destination = new CLabel(destinationComp, SWT.NONE);
 		this.destination.setBackground(composite.getBackground());
 		this.destination.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 

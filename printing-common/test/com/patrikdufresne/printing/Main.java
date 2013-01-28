@@ -1,3 +1,4 @@
+package com.patrikdufresne.printing;
 import net.sf.paperclips.Print;
 import net.sf.paperclips.PrintJob;
 import net.sf.paperclips.SeriesPrint;
@@ -5,9 +6,6 @@ import net.sf.paperclips.TextPrint;
 
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-
-import com.patrikdufresne.printing.PrintFactory;
-import com.patrikdufresne.printing.PrintPreviewDialog;
 
 public class Main {
 
