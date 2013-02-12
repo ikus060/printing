@@ -349,7 +349,7 @@ public class PrintPreviewDialog extends TrayDialog {
 			// preview.setPrinterData(data);
 
 			// Send the PrintJob to the printer
-			PaperClips.print(job, data);
+			PaperClips.print(job, newData);
 
 			// Close the preview
 			setReturnCode(Window.OK);
