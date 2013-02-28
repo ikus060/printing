@@ -66,7 +66,7 @@ public class PrintPreviewDialog extends TrayDialog {
 									// accumulating
 		private final Shell shell;
 		int shellWidth;
-											private final int TRAY_RATIO = 0; // Percentage of extra width devoted
+		private final int TRAY_RATIO = 0; // Percentage of extra width devoted
 
 		public ResizeListener(GridData data, Shell shell) {
 			this.data = data;
@@ -91,6 +91,7 @@ public class PrintPreviewDialog extends TrayDialog {
 			}
 		}
 	}
+
 	/**
 	 * Resource id for close icon.
 	 */
@@ -187,6 +188,7 @@ public class PrintPreviewDialog extends TrayDialog {
 
 		return null;
 	}
+
 	/**
 	 * Action changing the destination.
 	 */
@@ -703,6 +705,12 @@ public class PrintPreviewDialog extends TrayDialog {
 					Display.getCurrent().addFilter(SWT.MouseWheel, this);
 					break;
 				case SWT.MouseWheel:
+					// In some circumstance, this listener may not receive a
+					// MouseExit therefore this listener may receive
+					// notification while the widget is dispose.
+					if (scroll.isDisposed()) {
+						Display.getCurrent().removeFilter(SWT.MouseWheel, this);
+					}
 					if (event.count != 0) {
 						if (scrollable
 								&& !dragging
