@@ -28,8 +28,13 @@ import com.patrikdufresne.util.Localized;
  * 
  */
 public abstract class PrintWizard extends Wizard {
-	private static class CreatePrintJobRunnable implements
-			IRunnableWithProgress {
+	/**
+	 * Runnable to create the print.
+	 * 
+	 * @author Patrik Dufresne
+	 * 
+	 */
+	private class CreatePrintJobRunnable implements IRunnableWithProgress {
 		private IPrintFactory factory;
 
 		/**
@@ -61,12 +66,27 @@ public abstract class PrintWizard extends Wizard {
 		@Override
 		public void run(IProgressMonitor monitor)
 				throws InvocationTargetException, InterruptedException {
+
+			// Sets process
+			monitor.beginTask(localized.get("PrintAction.task.preparePreview"), //$NON-NLS-1$
+					IProgressMonitor.UNKNOWN);
+
+			initFactory(factory);
+
 			this.job = new PrintJob(factory.getName(), factory.createPrint());
 			this.job.setMargins(factory.getMargins());
 			this.job.setOrientation(factory.getOrientation());
+
+			// Task completed
+			monitor.done();
 		}
 
 	}
+
+	/**
+	 * Used to localize string.
+	 */
+	private Localized localized = Localized.load(PrintAction.class);
 
 	/**
 	 * The factory used to print.
@@ -112,10 +132,23 @@ public abstract class PrintWizard extends Wizard {
 
 	/**
 	 * Sub-class may implement this function to initialize the factory.
+	 * <p>
+	 * This function may not be called by the main Thread.
 	 * 
 	 * @param factory
+	 * 
+	 * @exception InvocationTargetException
+	 *                if the method must propagate an exception, it should wrap
+	 *                it inside an <code>InvocationTargetException</code>; FIXME
+	 *                runtime exceptions are automatically wrapped in an
+	 *                <code>InvocationTargetException</code> by the calling
+	 *                context
+	 * @exception InterruptedException
+	 *                if the operation is cancel by the user, this method should
+	 *                exit by throwing <code>InterruptedException</code>
 	 */
-	protected void initFactory(IPrintFactory factory) {
+	protected void initFactory(IPrintFactory factory)
+			throws InvocationTargetException, InterruptedException {
 		// Sub-classes may implement this function.
 	}
 
@@ -127,20 +160,22 @@ public abstract class PrintWizard extends Wizard {
 	@Override
 	public boolean performFinish() {
 		synchronized (this) {
-			initFactory(factory);
+
 			CreatePrintJobRunnable runnable = new CreatePrintJobRunnable(
 					factory);
 			try {
 				getContainer().run(true, false, runnable);
 			} catch (InvocationTargetException e) {
 				Policy.getStatusHandler()
-						.show(new Status(IStatus.ERROR, Policy.JFACE,
-								Localized.get(PrintWizard.class,
-										"PrintWizard.printErrorMessage"),
+						.show(new Status(
+								IStatus.ERROR,
+								Policy.JFACE,
+								this.localized
+										.get("PrintAction.previewErrorMessage"),
 								e.getCause()), null);
 				return false;
 			} catch (InterruptedException e) {
-				// Nothing to do, cancel by user
+				// Nothing to do, the operation was cancel by user
 				return false;
 			}
 
