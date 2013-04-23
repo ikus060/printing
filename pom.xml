@@ -4,13 +4,29 @@
 	<groupId>com.patrikdufresne.printing</groupId>
 	<artifactId>com.patrikdufresne.printing</artifactId>
 	<version>0.8-SNAPSHOT</version>
+	<!-- Sets the file encoding to be platform agnostic. -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 	<!-- Custom repository for JFace stuff. -->
 	<repositories>
 		<repository>
 			<id>patrikdufresne</id>
-			<url>http://patrikdufresne.com/common/export/master/repo</url>
+			<url>http://patrikdufresne.com/maven2/repo/</url>
 		</repository>
 	</repositories>
+	<!-- Define the SCM used for developpement. This information is used by 
+		release:prepare -->
+	<scm>
+		<developerConnection>scm:git:ssh://gitosis@tintaglia.patrikdufresne.com/printing.git</developerConnection>
+	</scm>
+	<!-- Define the repository. Used by deploy:deploy -->
+	<distributionManagement>
+		<repository>
+			<id>patrikdufresne</id>
+			<url>scpexe://patrikdufresne.com/var/www/maven2/repo/</url>
+		</repository>
+	</distributionManagement>
 	<dependencies>
 		<dependency>
 			<groupId>org.eclipse.jface</groupId>
@@ -31,65 +47,30 @@
 		<dependency>
 			<groupId>com.patrikdufresne</groupId>
 			<artifactId>com.patrikdufresne.util</artifactId>
-			<version>0.9-SNAPSHOT</version>
+			<version>0.11</version>
 		</dependency>
 	</dependencies>
 	<build>
-		<pluginManagement>
-			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
-					only. It has no influence on the Maven build itself. -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											com.mycila.maven-license-plugin
-										</groupId>
-										<artifactId>
-											maven-license-plugin
-										</artifactId>
-										<versionRange>
-											[1.9.0,)
-										</versionRange>
-										<goals>
-											<goal>format</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											com.googlecode.maven-java-formatter-plugin
-										</groupId>
-										<artifactId>
-											maven-java-formatter-plugin
-										</artifactId>
-										<versionRange>
-											[0.3.1,)
-										</versionRange>
-										<goals>
-											<goal>format</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
+		<extensions>
+			<!-- Enabling the use of SSH -->
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ssh-external</artifactId>
+				<version>1.0-beta-6</version>
+			</extension>
+		</extensions>
+		<!-- Include the .properties file located in /src/main/java -->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.properties</include>
+				</includes>
+			</resource>
+		</resources>
 		<plugins>
 			<!-- javac version to 1.6 -->
 			<plugin>
@@ -105,6 +86,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
+				<version>2.2.1</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -144,6 +126,9 @@
 					</execution>
 				</executions>
 				<configuration>
+					<excludes>
+						<exclude>**/*.properties</exclude>
+					</excludes>
 					<header>src/main/build-tools/license-header.txt</header>
 				</configuration>
 			</plugin>
