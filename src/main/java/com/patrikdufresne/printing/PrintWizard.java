@@ -17,7 +17,7 @@ package com.patrikdufresne.printing;
 
 import java.lang.reflect.InvocationTargetException;
 
-import net.sf.paperclips.PrintJob;
+import org.eclipse.nebula.paperclips.core.PrintJob;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -32,8 +32,7 @@ import org.eclipse.swt.printing.PrinterData;
 import com.patrikdufresne.util.Localized;
 
 /**
- * Abstract class providing a wizard for printing. Subclasses should override
- * the following functions:
+ * Abstract class providing a wizard for printing. Subclasses should override the following functions:
  * <ul>
  * <li>{@link #addPages()}</li>
  * <li>{@link #initFactory(IPrintFactory)}</li>
@@ -135,8 +134,7 @@ public abstract class PrintWizard extends Wizard {
     }
 
     /**
-     * Returns the preference store used by this Print action to save the
-     * Printer settings selected by the user.
+     * Returns the preference store used by this Print action to save the Printer settings selected by the user.
      * 
      * @return the preference or null if not set
      */
@@ -152,14 +150,12 @@ public abstract class PrintWizard extends Wizard {
      * @param factory
      * 
      * @exception InvocationTargetException
-     *                if the method must propagate an exception, it should wrap
-     *                it inside an <code>InvocationTargetException</code>; FIXME
-     *                runtime exceptions are automatically wrapped in an
-     *                <code>InvocationTargetException</code> by the calling
-     *                context
+     *                if the method must propagate an exception, it should wrap it inside an
+     *                <code>InvocationTargetException</code>; FIXME runtime exceptions are automatically wrapped in an
+     *                <code>InvocationTargetException</code> by the calling context
      * @exception InterruptedException
-     *                if the operation is cancel by the user, this method should
-     *                exit by throwing <code>InterruptedException</code>
+     *                if the operation is cancel by the user, this method should exit by throwing
+     *                <code>InterruptedException</code>
      */
     protected void initFactory(IPrintFactory factory) throws InvocationTargetException, InterruptedException {
         // Sub-classes may implement this function.
@@ -209,8 +205,7 @@ public abstract class PrintWizard extends Wizard {
     }
 
     /**
-     * Sets the preference store to use to save the printer settings selected by
-     * the user.
+     * Sets the preference store to use to save the printer settings selected by the user.
      * 
      * @param preferenceStore
      *            a preference store or null to unset

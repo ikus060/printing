@@ -15,9 +15,9 @@
  */
 package com.patrikdufresne.printing;
 
-import net.sf.paperclips.Margins;
-import net.sf.paperclips.PaperClips;
-import net.sf.paperclips.Print;
+import org.eclipse.nebula.paperclips.core.Margins;
+import org.eclipse.nebula.paperclips.core.PaperClips;
+import org.eclipse.nebula.paperclips.core.Print;
 
 /**
  * Class implementing this interface provide a way to create Print object.

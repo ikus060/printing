@@ -15,9 +15,9 @@
  */
 package com.patrikdufresne.printing;
 
-import net.sf.paperclips.EmptyPrint;
-import net.sf.paperclips.LayerPrint;
-import net.sf.paperclips.Print;
+import org.eclipse.nebula.paperclips.core.EmptyPrint;
+import org.eclipse.nebula.paperclips.core.LayerPrint;
+import org.eclipse.nebula.paperclips.core.Print;
 
 /**
  * This print is used to define a minimum height and/or width.
@@ -57,4 +57,5 @@ public class MinSizePrint extends LayerPrint {
         super.add(target);
         super.add(new EmptyPrint(width, height));
     }
+
 }

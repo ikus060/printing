@@ -15,10 +15,10 @@
  */
 package com.patrikdufresne.printing;
 
-import net.sf.paperclips.Border;
-import net.sf.paperclips.BorderPrint;
-import net.sf.paperclips.GapBorder;
-import net.sf.paperclips.Print;
+import org.eclipse.nebula.paperclips.core.border.Border;
+import org.eclipse.nebula.paperclips.core.border.BorderPrint;
+import org.eclipse.nebula.paperclips.core.border.GapBorder;
+import org.eclipse.nebula.paperclips.core.Print;
 
 /**
  * This print create gap around a print. This can be seans as a margin.

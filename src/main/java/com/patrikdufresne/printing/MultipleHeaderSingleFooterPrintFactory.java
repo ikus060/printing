@@ -15,11 +15,11 @@
  */
 package com.patrikdufresne.printing;
 
-import net.sf.paperclips.PageDecoration;
-import net.sf.paperclips.PageNumber;
-import net.sf.paperclips.PagePrint;
-import net.sf.paperclips.Print;
-import net.sf.paperclips.SeriesPrint;
+import org.eclipse.nebula.paperclips.core.page.PageDecoration;
+import org.eclipse.nebula.paperclips.core.page.PageNumber;
+import org.eclipse.nebula.paperclips.core.page.PagePrint;
+import org.eclipse.nebula.paperclips.core.Print;
+import org.eclipse.nebula.paperclips.core.SeriesPrint;
 
 /**
  * This implementation of {@link IPrintFactory} allows to create a different

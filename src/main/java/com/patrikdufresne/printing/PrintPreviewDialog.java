@@ -15,9 +15,9 @@
  */
 package com.patrikdufresne.printing;
 
-import net.sf.paperclips.PaperClips;
-import net.sf.paperclips.PrintJob;
-import net.sf.paperclips.ui.PrintPreview;
+import org.eclipse.nebula.paperclips.core.PaperClips;
+import org.eclipse.nebula.paperclips.core.PrintJob;
+import org.eclipse.nebula.paperclips.widgets.PrintPreview;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.ActionContributionItem;
@@ -58,16 +58,14 @@ import org.eclipse.swt.widgets.Text;
 import com.patrikdufresne.util.Localized;
 
 /**
- * Instances of this class allow the user to preview the Print object before
- * sending it to the printer. It also provide an easy way to change the Print
- * setting.
+ * Instances of this class allow the user to preview the Print object before sending it to the printer. It also provide
+ * an easy way to change the Print setting.
  * 
  */
 public class PrintPreviewDialog extends TrayDialog {
 
     /**
-     * This class is an adaptation of the ResizeListener class from TrayDialog
-     * to avoid resizing the left pane.
+     * This class is an adaptation of the ResizeListener class from TrayDialog to avoid resizing the left pane.
      * 
      * @author Patrik Dufresne
      * 
@@ -278,8 +276,7 @@ public class PrintPreviewDialog extends TrayDialog {
     };
 
     /**
-     * Action to print. Will prompt the user for a destination file when
-     * printing to file.
+     * Action to print. Will prompt the user for a destination file when printing to file.
      */
     private Action actionPrint = new Action(Localized.get(PrintPreviewDialog.class, "PrintPreviewDialog.print"), JFaceResources
             .getImageRegistry()
@@ -433,9 +430,8 @@ public class PrintPreviewDialog extends TrayDialog {
     }
 
     /**
-     * This implementation is an adaptation of the openTray function from
-     * TrayDialog to display the Tray on the left side and to avoid resizing the
-     * tray.
+     * This implementation is an adaptation of the openTray function from TrayDialog to display the Tray on the left
+     * side and to avoid resizing the tray.
      */
     @Override
     protected Control createDialogArea(Composite parent) {
@@ -496,8 +492,7 @@ public class PrintPreviewDialog extends TrayDialog {
     }
 
     /**
-     * Create the content of the dialog tray displayedon the right side of the
-     * dialog.
+     * Create the content of the dialog tray displayedon the right side of the dialog.
      * 
      * @param parent
      *            the parent composite
@@ -841,7 +836,9 @@ public class PrintPreviewDialog extends TrayDialog {
             else
                 minSize = new Point(0, preview.computeSize(bounds.width, SWT.DEFAULT).y); // Fit to width
         } else {
-            if (preview.isFitVertical()) minSize = new Point(preview.computeSize(SWT.DEFAULT, bounds.height).x, 0); // Fit to height
+            if (preview.isFitVertical()) minSize = new Point(preview.computeSize(SWT.DEFAULT, bounds.height).x, 0); // Fit
+            // to
+            // height
             else
                 minSize = preview.computeSize(SWT.DEFAULT, SWT.DEFAULT); // Custom
             // scale

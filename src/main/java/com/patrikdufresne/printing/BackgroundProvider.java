@@ -20,10 +20,10 @@ import java.util.Map;
 
 import org.eclipse.swt.graphics.RGB;
 
-import net.sf.paperclips.CellBackgroundProvider;
-import net.sf.paperclips.GridCell;
-import net.sf.paperclips.GridPrint;
-import net.sf.paperclips.Print;
+import org.eclipse.nebula.paperclips.core.grid.CellBackgroundProvider;
+import org.eclipse.nebula.paperclips.core.grid.GridCell;
+import org.eclipse.nebula.paperclips.core.grid.GridPrint;
+import org.eclipse.nebula.paperclips.core.Print;
 
 public class BackgroundProvider implements CellBackgroundProvider {
 

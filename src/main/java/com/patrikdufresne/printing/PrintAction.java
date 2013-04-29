@@ -17,9 +17,9 @@ package com.patrikdufresne.printing;
 
 import java.lang.reflect.InvocationTargetException;
 
-import net.sf.paperclips.PaperClips;
-import net.sf.paperclips.Print;
-import net.sf.paperclips.PrintJob;
+import org.eclipse.nebula.paperclips.core.PaperClips;
+import org.eclipse.nebula.paperclips.core.Print;
+import org.eclipse.nebula.paperclips.core.PrintJob;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;

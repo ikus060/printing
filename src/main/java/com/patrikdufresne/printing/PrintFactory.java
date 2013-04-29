@@ -15,8 +15,8 @@
  */
 package com.patrikdufresne.printing;
 
-import net.sf.paperclips.Margins;
-import net.sf.paperclips.PaperClips;
+import org.eclipse.nebula.paperclips.core.Margins;
+import org.eclipse.nebula.paperclips.core.PaperClips;
 
 /**
  * This class is used to easily implement a printing.

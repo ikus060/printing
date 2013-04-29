@@ -15,10 +15,10 @@
  */
 package com.patrikdufresne.printing;
 
-import net.sf.paperclips.Print;
-import net.sf.paperclips.PrintJob;
-import net.sf.paperclips.SeriesPrint;
-import net.sf.paperclips.TextPrint;
+import org.eclipse.nebula.paperclips.core.Print;
+import org.eclipse.nebula.paperclips.core.PrintJob;
+import org.eclipse.nebula.paperclips.core.SeriesPrint;
+import org.eclipse.nebula.paperclips.core.text.TextPrint;
 
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;

@@ -19,8 +19,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.FontData;
 
 /**
- * This utility class provide default fonts data that may be used for printing
- * purpose.
+ * This utility class provide default fonts data that may be used for printing purpose.
  * 
  * @author Patrik Dufresne
  * 
@@ -83,4 +82,9 @@ public class FontDataUtil {
         HEADER2.height = 12;
     }
 
+    public static final FontData MONOSPACE;
+    static {
+        MONOSPACE = new FontData();
+        MONOSPACE.setName("courrier");
+    }
 }
