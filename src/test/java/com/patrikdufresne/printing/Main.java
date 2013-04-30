@@ -62,6 +62,8 @@ public class Main {
 
                 layerPrint.add(new OffsetPrint(new TextPrint("Bottom-right (36,36)"), SWT.RIGHT, SWT.BOTTOM, 36, 36));
 
+                layerPrint.add(new PaddingPrint(new LinePrint(SWT.VERTICAL), 36, 288 - 36, 36, 288));
+
                 series.add(layerPrint);
 
                 return series;
