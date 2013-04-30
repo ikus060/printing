@@ -15,11 +15,15 @@
  */
 package com.patrikdufresne.printing;
 
+import org.eclipse.nebula.paperclips.core.AlignPrint;
+import org.eclipse.nebula.paperclips.core.ColumnPrint;
 import org.eclipse.nebula.paperclips.core.LayerPrint;
 import org.eclipse.nebula.paperclips.core.LinePrint;
 import org.eclipse.nebula.paperclips.core.Print;
 import org.eclipse.nebula.paperclips.core.PrintJob;
+import org.eclipse.nebula.paperclips.core.ScalePrint;
 import org.eclipse.nebula.paperclips.core.SeriesPrint;
+import org.eclipse.nebula.paperclips.core.SidewaysPrint;
 import org.eclipse.nebula.paperclips.core.text.TextPrint;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
@@ -44,8 +48,6 @@ public class Main {
 
                 series.add(new TextPrint("Page 1 with some data"));
 
-                series.add(new TextPrint("Page 2 will other data"));
-
                 // Test LayerPrint with offset
                 LayerPrint layerPrint = new LayerPrint();
                 layerPrint.add(new LinePrint());
@@ -65,6 +67,20 @@ public class Main {
                 layerPrint.add(new PaddingPrint(new LinePrint(SWT.VERTICAL), 36, 288 - 36, 36, 288));
 
                 series.add(layerPrint);
+
+                // Test with MaxSizePrint
+                StringBuilder buf = new StringBuilder();
+                for (int i = 0; i < 25; i++) {
+                    buf.append("This is some text");
+                }
+                LayerPrint layerPrint2 = new LayerPrint();
+                // Limited width
+                layerPrint2.add(new MaxSizePrint(new TextPrint("36pt width " + buf.toString()), 36, SWT.DEFAULT));
+
+                // Limited height
+                layerPrint2.add(new MaxSizePrint(new SidewaysPrint(new TextPrint("72pt height " + buf.toString())), SWT.DEFAULT, 72));
+
+                series.add(layerPrint2);
 
                 return series;
 
