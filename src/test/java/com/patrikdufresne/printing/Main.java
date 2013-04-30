@@ -15,11 +15,13 @@
  */
 package com.patrikdufresne.printing;
 
+import org.eclipse.nebula.paperclips.core.LayerPrint;
+import org.eclipse.nebula.paperclips.core.LinePrint;
 import org.eclipse.nebula.paperclips.core.Print;
 import org.eclipse.nebula.paperclips.core.PrintJob;
 import org.eclipse.nebula.paperclips.core.SeriesPrint;
 import org.eclipse.nebula.paperclips.core.text.TextPrint;
-
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
@@ -44,7 +46,23 @@ public class Main {
 
                 series.add(new TextPrint("Page 2 will other data"));
 
-                series.add(new TextPrint("Page 3 last page"));
+                // Test LayerPrint with offset
+                LayerPrint layerPrint = new LayerPrint();
+                layerPrint.add(new LinePrint());
+
+                layerPrint.add(new OffsetPrint(new TextPrint("Top-left (0,0)."), SWT.LEFT, SWT.TOP, 0, 0));
+
+                layerPrint.add(new OffsetPrint(new TextPrint("Top-Left(36,36)."), SWT.LEFT, SWT.TOP, 36, 36));
+
+                layerPrint.add(new OffsetPrint(new TextPrint("Top-right (0,0)"), SWT.RIGHT, SWT.TOP, 0, 0));
+
+                layerPrint.add(new OffsetPrint(new TextPrint("Bottom-left (72,72)"), SWT.LEFT, SWT.BOTTOM, 72, 72));
+
+                layerPrint.add(new OffsetPrint(new LinePrint(), SWT.LEFT, SWT.BOTTOM, 72, 144));
+
+                layerPrint.add(new OffsetPrint(new TextPrint("Bottom-right (36,36)"), SWT.RIGHT, SWT.BOTTOM, 36, 36));
+
+                series.add(layerPrint);
 
                 return series;
 
@@ -57,5 +75,4 @@ public class Main {
         dlg.open();
 
     }
-
 }
