@@ -16,6 +16,7 @@
 package com.patrikdufresne.printing;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 
 /**
@@ -85,6 +86,12 @@ public class FontDataUtil {
     public static final FontData MONOSPACE;
     static {
         MONOSPACE = new FontData();
-        MONOSPACE.setName("courrier");
+        MONOSPACE.setName("courier");
+    }
+    public static final FontData MONOSPACE_BOLD;
+    static {
+        MONOSPACE_BOLD = new FontData();
+        MONOSPACE_BOLD.setStyle(BOLD_SMALL.getStyle() | SWT.BOLD);
+        MONOSPACE_BOLD.setName("courier");
     }
 }
