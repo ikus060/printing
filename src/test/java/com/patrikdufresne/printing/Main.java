@@ -52,9 +52,9 @@ public class Main {
                 LayerPrint layerPrint = new LayerPrint();
                 layerPrint.add(new LinePrint());
 
-                layerPrint.add(new OffsetPrint(new TextPrint("Top-left (0,0)."), SWT.LEFT, SWT.TOP, 0, 0));
+                layerPrint.add(new OffsetPrint(new TextPrint("Top-left (0,0).", FontDataUtil.MONOSPACE), SWT.LEFT, SWT.TOP, 0, 0));
 
-                layerPrint.add(new OffsetPrint(new TextPrint("Top-Left(36,36)."), SWT.LEFT, SWT.TOP, 36, 36));
+                layerPrint.add(new OffsetPrint(new TextPrint("Top-Left(36,36).", FontDataUtil.MONOSPACE_BOLD), SWT.LEFT, SWT.TOP, 36, 36));
 
                 layerPrint.add(new OffsetPrint(new TextPrint("Top-right (0,0)"), SWT.RIGHT, SWT.TOP, 0, 0));
 

@@ -15,6 +15,8 @@
  */
 package com.patrikdufresne.printing;
 
+import org.eclipse.jface.resource.FontDescriptor;
+import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
@@ -83,15 +85,32 @@ public class FontDataUtil {
         HEADER2.height = 12;
     }
 
+    /**
+     * Font data for mono space font.
+     */
     public static final FontData MONOSPACE;
     static {
+        // Use jface implementation to get reference to a monospace font.
         MONOSPACE = new FontData();
         MONOSPACE.setName("courier");
+        FontData[] data = JFaceResources.getFontRegistry().getFontData(JFaceResources.TEXT_FONT);
+        if (data.length > 0) {
+            MONOSPACE.setName(data[0].getName());
+        }
     }
+
+    /**
+     * Font data for bold mono space font.
+     */
     public static final FontData MONOSPACE_BOLD;
     static {
+        // Use jface implementation to get reference to a monospace font.
         MONOSPACE_BOLD = new FontData();
         MONOSPACE_BOLD.setStyle(BOLD_SMALL.getStyle() | SWT.BOLD);
         MONOSPACE_BOLD.setName("courier");
+        FontData[] data = JFaceResources.getFontRegistry().getFontData(JFaceResources.TEXT_FONT);
+        if (data.length > 0) {
+            MONOSPACE.setName(data[0].getName());
+        }
     }
 }
