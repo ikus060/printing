@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.patrikdufresne.printing</groupId>
 	<artifactId>com.patrikdufresne.printing</artifactId>
-	<version>0.11-SNAPSHOT</version>
+	<version>${revision}</version>
 	<!-- Sets the file encoding to be platform agnostic. -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -14,11 +14,6 @@
 			<url>http://nexus.patrikdufresne.com/content/repositories/public/</url>
 		</repository>
 	</repositories>
-	<!-- Define the SCM used for developpement. This information is used by 
-		release:prepare -->
-	<scm>
-		<developerConnection>scm:git:ssh://gitosis@tintaglia.patrikdufresne.com/printing.git</developerConnection>
-	</scm>
 	<!-- Define the repository. Used by deploy:deploy -->
 	<distributionManagement>
 		<repository>
@@ -26,11 +21,6 @@
 			<name>Internal Releases</name>
 			<url>http://nexus.patrikdufresne.com/content/repositories/releases/</url>
 		</repository>
-		<snapshotRepository>
-			<id>patrikdufresne</id>
-			<name>Internal Releases</name>
-			<url>http://nexus.patrikdufresne.com/content/repositories/snapshots/</url>
-		</snapshotRepository>
 	</distributionManagement>
 	<dependencies>
 		<dependency>
